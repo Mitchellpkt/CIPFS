@@ -26,20 +26,21 @@ There are several downsides
 ### Procedure 
 
 Suppose Arlene wishes to share plaintext document `P` with Boris using IPFS. The CIPFS client performs this procedure:
-1.  Generate random number `R` from PRNG
-2.  Encrypt `P` with `R` to generate cyphertext `C`
-3.  Upload `C` to IPFS (which will index it by `H(C)`)
-4.  Display `CIPFS_ID' which is `H(C) || R`
+1.  Generate random number `R` from a pseudorandom number generator.
+2.  Encrypt `P` with `R` to generate cyphertext `C`.
+3.  Upload `C` to IPFS (which will index it by `H(C)`).
+4.  Display `CIPFS_ID' which is `H(C) || R`.
 
 Now, Arlene gives the `CIPFS_ID` string containing the pointer and the key to Boris. Boris's CIPFS client performs this procedure:
-1.  Break `CIPFS_ID` into `H(C)` and `R`
-2.  Query IPFS for `H(C)` and download `C`
-3.  Decrypt `C` using `R` to produce `P`
-4.  Display/save `P`
+1.  Break `CIPFS_ID` into `H(C)` and `R`.
+2.  Query IPFS for `H(C)` and download `C`.
+3.  Decrypt `C` using `R` to produce `P`.
+4.  Display/save `P`.
 
 ### Notes
 A few nice characteristics emerge
--  Only Arlene and Boris have `R` so the IPFS nodes cannot read the file
--  An attacker with `P` cannot perform hypothesis testing about file existance on IPFS, since without `R` they cannot generate `C` or `H(C)`
+-  Only Arlene and Boris have `R` so the IPFS nodes cannot decrypt `C` to read `P`.
+-  An attacker with `P` cannot perform hypothesis testing about file existance on IPFS, since without `R` they cannot generate `C` or `H(C)`.
 -  Arlene can share an **linked commit** by posting `H(C)` to prove that that `C` exists on IPFS. She can later reveal `R` to unlock `P`.
--  Arlene can also share an **unlinked commit** by posting `H(H(C)||R)` which is also `H(CIPFS_ID)`. Others cannot verify whether or not `C` exists on IPFS until Arlene reveals `CIPFS_ID`
+-  Arlene can also share an **unlinked commit** by posting `H(H(C)||R)` which is also `H(CIPFS_ID)`. Others cannot verify whether or not `C` exists on IPFS until Arlene reveals `CIPFS_ID`.
+-  the thing with censorship resistance.
