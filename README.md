@@ -11,7 +11,7 @@ CIPFS is an encryption layer on top of the existing IPFS. A random key is genera
 ## Notation
 Let `||` represent string concatenation, and `H(...)` represent IPFS's hash function
 
-## Current system (no privacy)
+## Current System (no privacy)
 We have a (plaintext) message or file `P` that we would like to store on IPFS. IPFS uses a global namespace with hash-based content-addressing, so we upload `P` and access it later by querying `H(P)`. 
 
 There are several downsides
@@ -23,13 +23,15 @@ There are several downsides
 
 ## Confidential IPFS
 
-### Procedure 
+### Upload Procedure 
 
 Suppose Arlene wishes to share plaintext document `P` with Boris using IPFS. The CIPFS client performs this procedure:
 1.  Generate random number `R` from a pseudorandom number generator.
 2.  Encrypt `P` with `R` to generate ciphertext `C`.
 3.  Upload `C` to IPFS (which will index it by `H(C)`).
 4.  Display `CIPFS_ID' which is `H(C) || R`.
+
+### Download Procedure 
 
 Now, Arlene gives the `CIPFS_ID` string containing the pointer and the key to Boris. Boris's CIPFS client performs this procedure:
 1.  Break `CIPFS_ID` into `H(C)` and `R`.
