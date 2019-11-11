@@ -16,8 +16,8 @@ We have a (plaintext) message or file `P` that we would like to store on IPFS. I
 
 There are several downsides
 -  IPFS nodes can read `P`.
--  Anybody with `H(P)` can retrieve P.
--  Anybody with a file `P` can test whether `H(P)` was uploaded to IPFS previously.
+-  Anybody with `H(P)` can retrieve `P`.
+-  Anybody with a file `P` can calculate `H(P)` and test whether the file was uploaded to IPFS previously.
 
 ^^ Note that these are largely features & design decisions rather than bugs. There are always privacy / convenience / scaling tradeoffs, and CIPFS will provide privacy (i.e. solve the 3 issues listed above) at the expense of a longer ID string and file deduplication.
 
