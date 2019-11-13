@@ -29,7 +29,7 @@ Suppose Arlene wishes to share plaintext document `P` with Boris using IPFS. The
 1.  Generate random number `R` from a pseudorandom number generator.
 2.  Symmetric encrypt `P` with `R` to generate ciphertext `C`.
 3.  Upload `C` to IPFS (which will index it by `H(C)`).
-4.  Display `CIPFS_ID' which is `H(C) || R`.
+4.  Display `CIPFS_ID`, which is `H(C) || R`.
 
 ### Download Procedure 
 
@@ -43,6 +43,6 @@ Now, Arlene gives the `CIPFS_ID` string containing the pointer and the key to Bo
 A few nice characteristics emerge
 -  **No read access for infrastructure**: Only Arlene and Boris have `R` so the IPFS nodes cannot decrypt `C` to read `P`.
 -  An attacker with `P` **cannot perform hypothesis** testing about file existance on IPFS, since without `R` they cannot generate `C` or `H(C)`.
--  Similarly, **censorship and surveillance resistance** arise since `R` introduces ciphertext unlinkability. Even if I have `P` and total surveillance over IPFS, I cannot prove which encrypted files & transmissions are related.
--  Arlene can share an **linked commit** by posting `H(C)` to prove that that `C` exists on IPFS. She can later reveal `R` to unlock `P`.
--  Arlene can also share an **unlinked commit** by posting `H(H(C)||R)` which is also `H(CIPFS_ID)`. Others cannot verify whether or not `C` exists on IPFS until Arlene reveals `CIPFS_ID`.
+-  Similarly, **censorship and surveillance resistance** arise since `R` introduces ciphertext unlinkability. Even if I am an attacker with `P` and total surveillance over IPFS, I cannot prove which encrypted files & transmissions are related.
+-  Arlene can share a **linked commit** by posting `H(C)` to prove that that `C` exists on IPFS. She can later reveal `R` to unlock `P`.
+-  Arlene can also share an **unlinked commit** by posting `H(H(C)||R)`, which is also `H(CIPFS_ID)`. Others cannot verify whether or not `C` exists on IPFS until Arlene reveals `CIPFS_ID`.
