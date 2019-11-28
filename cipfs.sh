@@ -68,7 +68,12 @@ echo ... decrypted
 
 echo
 echo ~~~~~~~~~~~~~~
-echo retrieved file name:
+echo Retrieved file name:
 echo C$FNAME
+echo
+echo Retrieved file SHA-256sum
+echo sha256sum C$FNAME
+echo ~~~~~~~~~~~~~~
+echo
 
 fi
