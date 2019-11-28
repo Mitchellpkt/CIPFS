@@ -16,7 +16,7 @@ echo ... encrypted file
 
 # Note... here's how to decrypt:
 # gpg --yes --batch --passphrase=[Enter your passphrase here] filename.txt.gpg
-
+	
 # Upload to IPFS
 IPFS_OUTPUT=`ipfs add $1.gpg`
 echo ... uploaded to IPFS
