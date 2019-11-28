@@ -36,13 +36,13 @@ IPFS_HASH=$(echo $IPFS_OUTPUT | awk '{print $2}') # Can I silence this?
 echo
 echo ~~~~~~~~~~~~~~
 echo CIPFS_address:
-echo $IPFS_HASH$KEY
+echo C$IPFS_HASH$KEY
 echo ~~~~~~~~~~~~~~
 echo
 
 fi
 
-
+	
 #########
 ## download
 if [ "$1" == "get" ]; then
@@ -51,8 +51,8 @@ if [ "$1" == "get" ]; then
 # First 46 characters are IPFS address
 # Remaining 32 characters are the symmetric decryption key
 x=$2 # er4rur843tru43f8fyu7weyf7wyf7whfygewvuw6fft6wftewgfwegf6ewgfcweygwluhvyrewvgykr
-FNAME=$(echo "$x" | cut -b 1-46)
-KEY=$(echo "$x" | cut -b 47-$((47+32)))
+FNAME=$(echo "$x" | cut -b 2-47)
+KEY=$(echo "$x" | cut -b 48-$((48+32)))
 
 # Download from to IPFS
 IPFS_OUTPUT=`ipfs get $FNAME`
@@ -62,6 +62,7 @@ mv $FNAME $FNAME.pgp
 # Decrypt the file 
 gpg --yes --batch --passphrase=$KEY $FNAME.pgp
 rm $FNAME.pgp
+mv $FNAME C$FNAME
 	
 echo ~~~~~~~~~~~~~~
 echo ... File retrieved and decrypted
