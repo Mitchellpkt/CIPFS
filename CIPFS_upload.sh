@@ -24,6 +24,7 @@ echo ... encrypted file
 	
 # Upload to IPFS
 IPFS_OUTPUT=`ipfs add $1.gpg`
+rm $1.gpg
 echo ... uploaded to IPFS
 
 IPFS_HASH=$(echo $IPFS_OUTPUT | awk '{print $2}') # Can I silence this?

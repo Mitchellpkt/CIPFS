@@ -13,14 +13,14 @@ FNAME=$(echo "$x" | cut -b 1-46)
 KEY=$(echo "$x" | cut -b 47-$((47+32)))
 
 # Download from to IPFS
-IPFS_OUTPUT=`ipfs get ....`
-NEW_FILENAME = #need code
+IPFS_OUTPUT=`ipfs get $FNAME`
 echo ... downloaded from IPFS
+mv $FNAME $FNAME.pgp
 
 # Decrypt the file 
-# gpg --yes --batch --passphrase=$KEY $NEW_FILENAME
+gpg --yes --batch --passphrase=$KEY $FNAME.pgp
+rm $FNAME.pgp
 	
-
 echo ~~~~~~~~~~~~~~
 echo ... File retrieved and decrypted
 echo $NEW_FILENAME
