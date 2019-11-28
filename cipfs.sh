@@ -81,7 +81,7 @@ echo C$FNAME
 echo
 echo Retrieved file SHA-256sum
 VARI=$(sha256sum C$FNAME)
-echo $VARI
+echo $VARI | head -n1 | awk '{print $1;}'
 echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
 
