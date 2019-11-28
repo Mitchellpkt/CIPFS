@@ -22,45 +22,39 @@ Run: `$ ./cipfs.sh add CIPFS_logo.png`
 
 Output:
 ```
-~~~~~~~~~~~~~~~~~~
-CIPFS (by Isthmus)
-~~~~~~~~~~~~~~~~~~
+*********************************
+    Confidential IPFS, v0.1
+@isthmus (github.com/mitchellpkt)
+*********************************
 
-NOTICE:
-CIPFS provides OFF-DEVICE confidentiality to prevent the network or IPFS nodes from reading your files. CIPFS provides NO ON-DEVICE security, and should not be used if you suspect that your device may be compromised
-
-PROGRESS:
 ... generated key
-... encrypted CIPFS_logo.png
- 19.92 KiB / 19.92 KiB [===============================================] 100.00%
- ... uploaded to IPFS
+... encrypted test.txt
+... uploading to IPFS
 
-~~~~~~~~~~~~~~
-CIPFS_address:
-CQmXGbnuW2utAwopErHAghDEzk9gSJPDJyVK4SP8qXjJrjRKcthNiHpAuw0nN7r9D6Aiv4y9x3PqJ7E
-~~~~~~~~~~~~~~
+ 81 B / 81 B [=========================================================] 100.00%
+
+*********************************
+Retrieve file with this CIPFS ticket:
+CQmNeX4tVLKSjLxtB8ZQQoeT3iEGjtEUVAsZ11167cMjk393PwSc54ImYD669PWrKkQchnmO3oesUBS
+*********************************
 ```
+
 ### Download
-Run: `$ ./cipfs.sh get CQmXGbnuW2utAwopErHAghDEzk9gSJPDJyVK4SP8qXjJrjRKcthNiHpAuw0nN7r9D6Aiv4y9x3PqJ7E`
+Run: `$ ./cipfs.sh get CQmNeX4tVLKSjLxtB8ZQQoeT3iEGjtEUVAsZ11167cMjk393PwSc54ImYD669PWrKkQchnmO3oesUBS`
 Output:
 ```
-~~~~~~~~~~~~~~~~~~
-CIPFS (by Isthmus)
-~~~~~~~~~~~~~~~~~~
-
-NOTICE:
-CIPFS provides OFF-DEVICE confidentiality to prevent the network or IPFS nodes from reading your files. CIPFS provides NO ON-DEVICE security, and should not be used if you suspect that your device may be compromised
-
- 19.92 KiB / 19.92 KiB [============================================] 100.00% 0s
+PROGRESS:
+ 81 B / 81 B [======================================================] 100.00% 0s
 ... downloaded from IPFS
-gpg: WARNING: no command supplied.  Trying to guess what you mean ...
-gpg: AES256 encrypted data
-gpg: encrypted with 1 passphrase
-... decrypted
+... decrypted file
 
-~~~~~~~~~~~~~~
-retrieved file name:
-CQmXGbnuW2utAwopErHAghDEzk9gSJPDJyVK4SP8qXjJrjR
+*********************************
+Retrieved file name:
+CQmNeX4tVLKSjLxtB8ZQQoeT3iEGjtEUVAsZ11167cMjk39
+
+Retrieved file SHA-256 sum:
+f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2
+*********************************
 ```
 ## Motivation
 The current implementation of IPFS offers no privacy by default - files are uploaded in plaintext, and accessible to strangers' nodes and anybody with the hash.
