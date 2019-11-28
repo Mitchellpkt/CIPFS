@@ -27,7 +27,7 @@ KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 echo ... generated key
 
 # Encrypt file
-gpg --yes --batch --passphrase=$KEY -c $2
+gpg --yes --batch --passphrase=$KEY --cipher-algo AES256 -c $2
 echo ... encrypted $2
 	
 # Upload to IPFS
@@ -68,7 +68,7 @@ echo ... downloaded from IPFS
 mv $FNAME $FNAME.gpg
 
 # Decrypt the file 
-gpg --yes --batch --quiet --passphrase=$KEY $FNAME.gpg
+gpg --yes --batch --quiet --cipher-algo AES256 --passphrase=$KEY $FNAME.gpg
 rm $FNAME.gpg
 mv $FNAME C$FNAME
 	
