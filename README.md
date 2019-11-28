@@ -80,12 +80,12 @@ Suppose Arlene wishes to share plaintext document `P` with Boris using IPFS. The
 1.  Generate random number `R` from a pseudorandom number generator.
 2.  Symmetric encrypt `P` with `R` to generate ciphertext `X`.
 3.  Upload `X` to IPFS (which will index it by `H(X)`).
-4.  Display `CIPFS_ID`, which is `C || H(X) || R`.
+4.  Display `CIPFS_ticket`, which is `C || H(X) || R`.
 
 ### Download Procedure 
 
-Now, Arlene gives the `CIPFS_ID` string containing the pointer and the key to Boris. Boris's CIPFS client performs this procedure:
-1.  Break `CIPFS_ID` into `H(X)` and `R`.
+Now, Arlene gives the `CIPFS_ticket` string containing the pointer and the key to Boris. Boris's CIPFS client performs this procedure:
+1.  Break `CIPFS_ticket` into `H(X)` and `R`.
 2.  Query IPFS for `H(X)` and download `X`.
 3.  Symmetric decrypt `X` using `R` to produce `P`.
 4.  Display/save `P`.
@@ -96,4 +96,4 @@ A few nice characteristics emerge
 -  An attacker with `P` **cannot perform hypothesis** testing about file existance on IPFS, since without `R` they cannot generate X` or `H(X)`.
 -  Similarly, **censorship and surveillance resistance** arise since `R` introduces ciphertext unlinkability. Even if I am an attacker with `P` and total surveillance over IPFS, I cannot prove which encrypted files & transmissions are related.
 -  Arlene can share a **linked commit** by posting `H(X)` to prove that that `X` exists on IPFS. She can later reveal `R` to unlock `P`.
--  Arlene can also share an **unlinked commit** by posting `H(C||H(X)||R)`, which is also `H(CIPFS_ID)`. Others cannot verify whether or not `X` exists on IPFS until Arlene reveals `CIPFS_ID`.
+-  Arlene can also share an **unlinked commit** by posting `H(C||H(X)||R)`, which is also `H(CIPFS_ticket)`. Others cannot verify whether or not `X` exists on IPFS until Arlene reveals `CIPFS_ticket`.
