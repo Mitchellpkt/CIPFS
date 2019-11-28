@@ -68,7 +68,7 @@ echo ... downloaded from IPFS
 mv $FNAME $FNAME.pgp
 
 # Decrypt the file 
-gpg --yes --batch --passphrase=$KEY $FNAME.pgp
+gpg --yes --batch --quiet --passphrase=$KEY $FNAME.pgp
 rm $FNAME.pgp
 mv $FNAME C$FNAME
 	
@@ -79,7 +79,7 @@ echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo Retrieved file name:
 echo C$FNAME
 echo
-echo Retrieved file SHA-256sum
+echo Retrieved file SHA-256 sum:
 VARI=$(sha256sum C$FNAME)
 echo $VARI | head -n1 | awk '{print $1;}'
 echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
