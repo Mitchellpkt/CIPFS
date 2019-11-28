@@ -8,11 +8,9 @@ echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Split the name ($1) into hash & key
 # First 46 characters are IPFS address
 # Remaining 32 characters are the symmetric decryption key
-FULLNAME = $1
-FILEHASH = echo ${FULLNAME:0:45}
-KEY = echo ${FULLNAME:46:77}
-
-#NEED CODE HERE
+x=$1 # er4rur843tru43f8fyu7weyf7wyf7whfygewvuw6fft6wftewgfwegf6ewgfcweygwluhvyrewvgykr
+FNAME=$(echo "$x" | cut -b 1-46)
+KEY=$(echo "$x" | cut -b 47-$((47+32)))
 
 # Download from to IPFS
 IPFS_OUTPUT=`ipfs get ....`
