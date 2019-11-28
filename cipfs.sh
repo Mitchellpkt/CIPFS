@@ -63,6 +63,7 @@ KEY=$(echo "$x" | cut -b 48-$((48+32)))
 
 # Download from to IPFS
 IPFS_OUTPUT=`ipfs get $FNAME`
+echo
 echo ... downloaded from IPFS
 mv $FNAME $FNAME.pgp
 
@@ -71,16 +72,17 @@ gpg --yes --batch --passphrase=$KEY $FNAME.pgp
 rm $FNAME.pgp
 mv $FNAME C$FNAME
 	
-echo ... decrypted
+echo ... decrypted file
 
 echo
-echo ~~~~~~~~~~~~~~
+echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo Retrieved file name:
 echo C$FNAME
 echo
 echo Retrieved file SHA-256sum
-echo sha256sum C$FNAME
-echo ~~~~~~~~~~~~~~
+VARI=$(sha256sum C$FNAME)
+echo $VARI
+echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
 
 fi
