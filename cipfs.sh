@@ -1,19 +1,26 @@
 #!/bin/bash
 
 # Say hi
-echo ~~~~~~~~~~~~~~~~~~
-echo "CIPFS (by Isthmus)"
-echo ~~~~~~~~~~~~~~~~~~
+echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+echo "    Confidential IPFS, v0.1"
+echo @isthmus \(github.com\/mitchellpkt\)
+echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
-echo NOTICE: 
-echo CIPFS provides OFF-DEVICE confidentiality to prevent the network or IPFS nodes from reading your files. CIPFS provides NO ON-DEVICE security, and should not be used if you suspect that your device may be compromised
+echo --------
+echo NOTICES:
+echo - CIPFS requires standard PGP and IPFS to be installed
+echo - This implementation provides OFF-DEVICE security
+echo - Feel free to improve, modify, and distribute CIPFS code \& protocol
+echo  \ \ \(please include attribution and PR useful tweaks to origin repo\)
+echo 
+echo --------
+echo PROGRESS:
 echo
 
 #########
-## upload
+## upload functionality
 if [ "$1" == "add" ]; then
 
-echo PROGRESS:
 # Generate  random 32 character alphanumeric string (upper and lowercase) 
 # Code from https://gist.github.com/earthgecko/3089509
 KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -22,22 +29,22 @@ echo ... generated key
 # Encrypt file
 gpg --yes --batch --passphrase=$KEY -c $2
 echo ... encrypted $2
-
-# Note... here's how to decrypt:
-# gpg --yes --batch --passphrase=[Enter your passphrase here] filename.txt.gpg
 	
 # Upload to IPFS
+echo ... uploading to IPFS
+echo
 IPFS_OUTPUT=`ipfs add $2.gpg`
+echo
 rm $2.gpg
-echo ... uploaded to IPFS
 
-IPFS_HASH=$(echo $IPFS_OUTPUT | awk '{print $2}') # Can I silence this?
+# Extract IPFS name
+IPFS_HASH=$(echo $IPFS_OUTPUT | awk '{print $2}')
 
 echo
-echo ~~~~~~~~~~~~~~
-echo CIPFS_address:
+echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+echo Retrieve file with this CIPFS ticket:
 echo C$IPFS_HASH$KEY
-echo ~~~~~~~~~~~~~~
+echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
 
 fi
