@@ -64,8 +64,11 @@ gpg --yes --batch --passphrase=$KEY $FNAME.pgp
 rm $FNAME.pgp
 mv $FNAME C$FNAME
 	
+echo ... decrypted
+
+echo
 echo ~~~~~~~~~~~~~~
-echo ... File retrieved and decrypted
-echo $NEW_FILENAME
+echo retrieved file name:
+echo C$FNAME
 
 fi
