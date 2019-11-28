@@ -31,29 +31,31 @@ Output:
 ... encrypted test.txt
 ... uploading to IPFS
 
- 81 B / 81 B [=========================================================] 100.00%
+ 19.92 KiB / 19.92 KiB [===============================================] 100.00%
 
 *********************************
 Retrieve file with this CIPFS ticket:
-CQmNeX4tVLKSjLxtB8ZQQoeT3iEGjtEUVAsZ11167cMjk393PwSc54ImYD669PWrKkQchnmO3oesUBS
+CQmZw7LBEQn2HkKXR4NjwMsZSF7c6ThRTLyKSjEzWpsjY77k0OnHY9fOEzVw15bERThqoKu6zJxgolc
 *********************************
 ```
 
 ### Download
-Run: `$ ./cipfs.sh get CQmNeX4tVLKSjLxtB8ZQQoeT3iEGjtEUVAsZ11167cMjk393PwSc54ImYD669PWrKkQchnmO3oesUBS`
+Run: `$ ./cipfs.sh get CQmZw7LBEQn2HkKXR4NjwMsZSF7c6ThRTLyKSjEzWpsjY77k0OnHY9fOEzVw15bERThqoKu6zJxgolc  `
 Output:
 ```
 PROGRESS:
- 81 B / 81 B [======================================================] 100.00% 0s
+
+ 19.92 KiB / 19.92 KiB [============================================] 100.00% 0s
+
 ... downloaded from IPFS
 ... decrypted file
 
 *********************************
 Retrieved file name:
-CQmNeX4tVLKSjLxtB8ZQQoeT3iEGjtEUVAsZ11167cMjk39
+CQmZw7LBEQn2HkKXR4NjwMsZSF7c6ThRTLyKSjEzWpsjY77
 
 Retrieved file SHA-256 sum:
-f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2
+79228e7f85692032b5c49285c95bc4af7e487e526d982a1dc66ddd8cb188e1a0
 *********************************
 ```
 ## Motivation
