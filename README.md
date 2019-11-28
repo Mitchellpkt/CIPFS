@@ -8,11 +8,13 @@ CIPFS is an encryption layer on top of the existing IPFS. A random key is genera
 # Use
 CIPFS syntax mimics IPFS - just add a 'c' on front.
 ## Upload a file
-Input: `cipfs add <plaintext filename>`
+Run: `cipfs add <plaintext filename>`
+
 (displays the CIPFS ID at the end)
 ## Download a file
-Input: `cipfs get <CIPFS ID>`
-(writes file to current directory
+Run: `cipfs get <CIPFS ID>`
+
+(writes file to current directory)
 ## Example
 ### Upload
 
@@ -30,7 +32,8 @@ CIPFS provides OFF-DEVICE confidentiality to prevent the network or IPFS nodes f
 PROGRESS:
 ... generated key
 ... encrypted CIPFS_logo.png
- 19.92 KiB / 19.92 KiB [===============================================] 100.00%... uploaded to IPFS
+ 19.92 KiB / 19.92 KiB [===============================================] 100.00%
+ ... uploaded to IPFS
 
 ~~~~~~~~~~~~~~
 CIPFS_address:
