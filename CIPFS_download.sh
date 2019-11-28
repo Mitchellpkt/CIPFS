@@ -8,6 +8,9 @@ echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Split the name ($1) into hash & key
 # First 46 characters are IPFS address
 # Remaining 32 characters are the symmetric decryption key
+FULLNAME = $1
+FILEHASH = echo ${FULLNAME:0:45}
+KEY = echo ${FULLNAME:46:77}
 
 #NEED CODE HERE
 
