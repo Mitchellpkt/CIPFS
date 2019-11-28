@@ -65,11 +65,11 @@ KEY=$(echo "$x" | cut -b 48-$((48+32)))
 IPFS_OUTPUT=`ipfs get $FNAME`
 echo
 echo ... downloaded from IPFS
-mv $FNAME $FNAME.pgp
+mv $FNAME $FNAME.gpg
 
 # Decrypt the file 
-gpg --yes --batch --quiet --passphrase=$KEY $FNAME.pgp
-rm $FNAME.pgp
+gpg --yes --batch --quiet --passphrase=$KEY $FNAME.gpg
+rm $FNAME.gpg
 mv $FNAME C$FNAME
 	
 echo ... decrypted file
