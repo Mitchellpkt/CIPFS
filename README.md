@@ -7,6 +7,9 @@ CIPFS is an encryption layer on top of the existing IPFS. A random key is genera
 
 # Use
 CIPFS syntax mimics IPFS - just add a 'c' on front.
+
+![Example.png](Example.png)
+
 ## Upload a file
 Run: `cipfs add <plaintext filename>`
 
