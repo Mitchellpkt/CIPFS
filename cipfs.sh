@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Say hi
+echo
 echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo "    Confidential IPFS, v0.1"
 echo @isthmus \(github.com\/mitchellpkt\)
