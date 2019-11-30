@@ -9,10 +9,15 @@ echo \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 echo
 echo --------
 echo NOTICES:
-echo - CIPFS requires standard PGP and IPFS to be installed
-echo - This implementation provides OFF-DEVICE security
-echo - Feel free to improve, modify, and distribute CIPFS code \& protocol
+echo -  CIPFS requires standard PGP and IPFS to be installed
+echo -  This implementation provides OFF-DEVICE security
+echo -  Feel free to improve, modify, and distribute CIPFS code \& protocol
 echo  \ \ \(please include attribution and PR useful tweaks to origin repo\)
+echo -  Default behavior is deterministic key generation
+echo  \ \ \i.e. symmetric encrypt with first 32 chars of SHA-256 sum, so that:
+echo   \ \ identical files ==\> identical ciphertexts ==\> no IPFS bloat
+echo   -  If your threat model is sensitive to IPFS storage hypothesis testing, 
+echo   \ \ "then add --random-key flag to generate a unique one-time key"
 echo 
 echo --------
 echo PROGRESS:
@@ -22,10 +27,22 @@ echo
 ## upload functionality
 if [ "$1" == "add" ]; then
 
+# Random or deterministic key?
+if [[ " $* " == *' --random-key '* ]]
+then
 # Generate  random 32 character alphanumeric string (upper and lowercase) 
 # Code from https://gist.github.com/earthgecko/3089509
 KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-echo ... generated key
+echo ... generated random key
+else
+FHASH=$(sha256sum $2)
+echo hash is:
+echo $FHASH
+KEY=$(echo "$FHASH" | cut -b 1-32)
+echo key is
+echo $KEY
+echo ... generated deterministic key
+fi
 
 # Encrypt file
 gpg --yes --batch --passphrase=$KEY --cipher-algo AES256 -c $2
