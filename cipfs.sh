@@ -85,11 +85,18 @@ x=$2
 FNAME=$(echo "$x" | cut -b 2-47)
 KEY=$(echo "$x" | cut -b 48-$((48+32)))
 
+if [[ " $* " == *' --tor '* ]]; then
+ENTRY_PT=https://ipfs.io
+####################
+## Download from IPFS web entry point via tor
+IPFS_OUTPUT=`curl -o $FNAME -x socks5h://127.0.0.1:9050 $ENTRY_PT/ipfs/$FNAME`
+else
 ####################
 ## Download from IPFS
 IPFS_OUTPUT=`ipfs get $FNAME`
 echo
 echo ... downloaded from IPFS
+fi
 mv $FNAME $FNAME.gpg
 
 ####################
