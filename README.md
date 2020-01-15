@@ -82,10 +82,12 @@ There are several downsides
 ### Upload Procedure 
 
 Suppose Arlene wishes to share plaintext document `P` with Boris using IPFS. The CIPFS client performs this procedure:
-1.  Generate random number `R` from a pseudorandom number generator.
+1.  Generate random number `R` from a pseudorandom number generator (if using `--random-key flag`)
 2.  Symmetric encrypt `P` with `R` to generate ciphertext `X`.
 3.  Upload `X` to IPFS (which will index it by `H(X)`).
 4.  Display `CIPFS_ticket`, which is `C || H(X) || R`.
+
+Note: Default behavior is deterministic key generation (i.e. symmetric encrypt with first 32 chars of SHA-256 sum). This means that identical files ==> identical ciphertexts ==>> no IPFS bloat. If your threat model is sensitive to IPFS storage hypothesis testing, then add `--random-key` flag to generate a unique one-time key.
 
 ### Download Procedure 
 
@@ -96,9 +98,9 @@ Now, Arlene gives the `CIPFS_ticket` string containing the pointer and the key t
 4.  Display/save `P`.
 
 ### Notes
-A few nice characteristics emerge
+A few nice characteristics emerge:
 -  **No read access for infrastructure**: Only Arlene and Boris have `R` so the IPFS nodes cannot decrypt `X` to read `P`.
--  An attacker with `P` **cannot perform hypothesis** testing about file existance on IPFS, since without `R` they cannot generate X` or `H(X)`.
+-  If using `--random-key`, then an attacker with `P` **cannot perform hypothesis** testing about file existance on IPFS, since without `R` they cannot generate X` or `H(X)`.
 -  Similarly, **censorship and surveillance resistance** arise since `R` introduces ciphertext unlinkability. Even if I am an attacker with `P` and total surveillance over IPFS, I cannot prove which encrypted files & transmissions are related.
 -  Arlene can share a **linked commit** by posting `H(X)` to prove that that `X` exists on IPFS. She can later reveal `R` to unlock `P`.
 -  Arlene can also share an **unlinked commit** by posting `H(C||H(X)||R)`, which is also `H(CIPFS_ticket)`. Others cannot verify whether or not `X` exists on IPFS until Arlene reveals `CIPFS_ticket`.
